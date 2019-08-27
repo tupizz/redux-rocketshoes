@@ -1,10 +1,27 @@
+import produce from 'immer';
+
 /**
  * Os reducers escutam todas as actions, por isso precisamos filtrar
+ *
+ *  [{
+ *      product,
+ *      amount
+ *  }]
  */
 export default function cart(state = [], action) {
     switch (action.type) {
         case 'ADD_TO_CART':
-            return [...state, action.product];
+            return produce(state, draft => {
+                const productIndex = draft.findIndex(
+                    p => p.id === action.product.id
+                );
+
+                if (productIndex >= 0) {
+                    draft[productIndex].amount += 1;
+                } else {
+                    draft.push({ ...action.product, amount: 1 });
+                }
+            });
         default:
             return state;
     }

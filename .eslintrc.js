@@ -28,6 +28,7 @@ module.exports = {
       'prettier/prettier': 'error',
       'no-console': ['error', { allow: ['tron']}],
       'react/state-in-constructor': 'off',
+      'no-param-reassign': 'off',
       'react/jsx-filename-extension': [
           'warn',
           {
