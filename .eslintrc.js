@@ -26,6 +26,7 @@ module.exports = {
   ],
   rules: {
       'prettier/prettier': 'error',
+      'no-console': ['error', { allow: ['tron']}],
       'react/state-in-constructor': 'off',
       'react/jsx-filename-extension': [
           'warn',
