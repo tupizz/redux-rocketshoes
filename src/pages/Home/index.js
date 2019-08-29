@@ -34,6 +34,7 @@ class Home extends Component {
 
     render() {
         const { products } = this.state;
+        const { amountObject } = this.props;
         return (
             <ProductList>
                 {products.map(product => (
@@ -47,7 +48,8 @@ class Home extends Component {
                             onClick={() => this.handleAddProduct(product)}
                         >
                             <div>
-                                <MdAddShoppingCart size={16} color="#FFF" /> 3
+                                <MdAddShoppingCart size={16} color="#FFF" />{' '}
+                                {amountObject[product.id] || 0}
                             </div>
 
                             <span>ADICIONAR AO CARRINHO</span>
@@ -59,6 +61,13 @@ class Home extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    amountObject: state.cart.reduce((amount, product) => {
+        amount[product.id] = product.amount;
+        return amount;
+    }, {}),
+});
+
 /** adiciona as prop do componentes as actions */
 const mapDispatchToProps = dispatch =>
     bindActionCreators(CartActions, dispatch);
@@ -67,6 +76,6 @@ const mapDispatchToProps = dispatch =>
  * Conectamos um reducer específico com o componente em questão
  */
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(Home);
