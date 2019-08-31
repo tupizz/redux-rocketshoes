@@ -25,6 +25,7 @@ module.exports = {
     'prettier'
   ],
   rules: {
+      'react/prop-types': 'off',
       'prettier/prettier': 'error',
       'no-console': ['error', { allow: ['tron']}],
       'react/state-in-constructor': 'off',
